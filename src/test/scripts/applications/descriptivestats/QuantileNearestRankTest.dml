@@ -1,0 +1,16 @@
+# SYSTEMDS-3898 regression test
+# Quantile follows nearest-rank semantics (no interpolation)
+
+V = as.matrix(list(1,5,7,10));
+P = as.matrix(list(0.25, 0.5, 0.75));
+
+Q = quantile(V, P);
+print(toString(Q));
+
+# Median should average for even length
+print(median(V));
+
+# Weighted quantile dominance test
+W = as.matrix(list(1,1,10,1));
+WQ = quantile(V, W, P);
+print(toString(WQ));
